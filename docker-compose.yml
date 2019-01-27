@@ -3,7 +3,9 @@ services:
     mongo_xenial:
         image: mongo:4.1.7-xenial
         restart: always
+        command: --sslPEMKeyFile ./mongo/etc/ssl/mongo.pem
         volumes:
+            - ./mongo/etc/ssl:/etc/ssl
             - ./mongo/db:/data/db
         ports:
             - 27017:27017
