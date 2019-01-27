@@ -1,0 +1,59 @@
+version: '3'
+services:
+    mongo_xenial:
+        image: mongo:4.1.7-xenial
+        restart: always
+        volumes:
+            - ./mongo/db:/data/db
+        ports:
+            - 27017:27017
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=mdbroot
+            - MONGO_INITDB_ROOT_PASSWORD=mdbpass
+            - MONGO_INITDB_DATABASE=graphql_demo
+        networks:
+            - graphql_network
+
+    mongo_express:
+        image: mongo-express
+        restart: always
+        ports:
+            - 8081:8081
+        environment:
+            - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
+            - ME_CONFIG_BASICAUTH_USERNAME=mdbroot
+            - ME_CONFIG_BASICAUTH_PASSWORD=mdbpass
+            - ME_CONFIG_MONGODB_SERVER=mongo_xenial
+        depends_on:
+            - mongo_xenial
+        links:
+            - mongo_xenial
+        networks:
+            - graphql_network
+
+    nodejs:
+        build: ./nodejs
+        command: npm run dev
+        hostname: nodejs.docker.local
+        volumes:
+            - ./nodejs:/usr/src/app
+            - node_modules:/usr/src/app/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
+        ports:
+            - 8080:8080
+        depends_on:
+            - mongo_xenial
+        networks:
+            - graphql_network
+
+volumes:
+    node_modules:
+
+networks:
+    graphql_network:
+        driver: bridge
+        driver_opts:
+            com.docker.network.enable_ipv6: "false"
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.16.238.0/24
