@@ -13,7 +13,7 @@ const app = express();
 mongoose.connect("mongodb://mdbroot:mdbpass@mongo:27017/admin", { useNewUrlParser: true })
 mongoose.connection.once("open", () => {
     console.log("Connected to Mongodb...");
-})
+});
 
 app.use("/graphql", graphqlHTTP({
     schema,

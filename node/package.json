@@ -6,7 +6,8 @@
     "license": "ISC",
     "main": "src/app.js",
     "scripts": {
-        "dev": "nodemon src/app.js"
+        "dev": "nodemon src/app.js",
+        "debug": "nodemon --inspect src/app.js"
     },
     "dependencies": {
         "express": "^4.16.4",

@@ -15,7 +15,7 @@ services:
         networks:
             - graphqlnet
 
-    mongoexpress:
+    mongo-express:
         image: mongo-express:0.49.0
         restart: always
         ports:
@@ -23,7 +23,7 @@ services:
         environment:
             - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
             - ME_CONFIG_MONGODB_ADMINUSERNAME=mdbroot
-            - ME_CONFIG_MONGODB_ADMIN_PASSWORD=mdbpass
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=mdbpass
         depends_on:
             - mongo
         links:
@@ -31,12 +31,12 @@ services:
         networks:
             - graphqlnet
 
-    nodejs:
-        build: ./nodejs
+    node:
+        build: ./node
+        image: node:0.1
         command: npm run dev
-        hostname: nodejs.docker.local
         volumes:
-            - ./nodejs:/usr/src/app
+            - ./node:/usr/src/app
             - node_modules:/usr/src/app/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
         ports:
             - 8080:8080
