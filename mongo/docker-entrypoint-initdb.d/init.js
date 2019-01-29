@@ -1,6 +1,7 @@
+/*
 db.auth("mdbroot", "mdbpass");
 
-db = db.getSiblingDB("graphql_demo");
+db = db.getSiblingDB("graphqldemo");
 
 db.createUser({
     user: "demouser",
@@ -9,3 +10,4 @@ db.createUser({
         { root: "root", db: "admin" }
     ]
 });
+/**/
