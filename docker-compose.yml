@@ -4,7 +4,6 @@ services:
         image: mongo:4.1.7-xenial
         restart: always
         volumes:
-            - ./mongo/etc/ssl:/etc/ssl
             - ./mongo/db:/data/db
         ports:
             - 27017:27017
@@ -31,22 +30,39 @@ services:
         networks:
             - graphqlnet
 
-    node:
-        build: ./node
-        image: node:0.1
+    server:
+        build: ./node/server
+        image: node-server:0.1
+        restart: always
         command: npm run dev
         volumes:
-            - ./node:/usr/src/app
-            - node_modules:/usr/src/app/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
+            - ./node/server:/usr/src/app
+            - server_node_modules:/usr/src/app/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
         ports:
-            - 8080:8080
+            - 4000:4000
         depends_on:
             - mongo
         networks:
             - graphqlnet
 
+    client:
+        build: ./node/server
+        image: node-client:0.1
+        restart: always
+        command: npm run start
+        volumes:
+            - ./node/client/server:/usr/src/app
+            - client_node_modules:/usr/src/app/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
+        ports:
+            - 3000:3000
+        depends_on:
+            - server
+        networks:
+            - graphqlnet
+
 volumes:
-    node_modules:
+    server_node_modules:
+    client_node_modules:
 
 networks:
     graphqlnet:

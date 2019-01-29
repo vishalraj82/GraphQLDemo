@@ -1,22 +1,22 @@
 {
-    "name": "GraphQL-NodeJS-Demo",
-    "description": "GraphQL NodeJS Demo",
-    "version": "1.0.0",
+    "name": "GraphQL-Client-Demo",
+    "description": "GraphQL Server Demo",
+    "version": "0.1.0",
     "author": "Vishal Raj <vishalraj82@gmail.com>",
     "license": "ISC",
     "main": "src/app.js",
     "scripts": {
         "dev": "nodemon src/app.js",
-        "debug": "nodemon --inspect src/app.js"
+        "debug": "nodemon src/app.js"
     },
     "dependencies": {
         "express": "^4.16.4",
         "graphql": "^14.1.1",
-        "express-graphql": "^0.7.1",
-        "mongoose": "^5.4.6"
+        "apollo-boost": "^0.1.27",
+        "react-aoollo": "^2.4.1"
     },
     "devDependencies": {
         "nodemon": "^1.18.9"
     },
-    "repository": "https://github.com/vishalraj82/GraphQL"
+    "repository": "https://github.com/vishalraj82/GraphQLDemo"
 }

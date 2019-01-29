@@ -1,0 +1,22 @@
+{
+    "name": "GraphQL-Server-Demo",
+    "description": "GraphQL Server Demo",
+    "version": "0.1.0",
+    "author": "Vishal Raj <vishalraj82@gmail.com>",
+    "license": "ISC",
+    "main": "src/app.js",
+    "scripts": {
+        "dev": "nodemon src/app.js",
+        "debug": "nodemon src/app.js"
+    },
+    "dependencies": {
+        "express": "^4.16.4",
+        "graphql": "^14.1.1",
+        "express-graphql": "^0.7.1",
+        "mongoose": "^5.4.6"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.9"
+    },
+    "repository": "https://github.com/vishalraj82/GraphQLDemo"
+}
