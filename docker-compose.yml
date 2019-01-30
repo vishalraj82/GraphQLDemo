@@ -46,17 +46,15 @@ services:
             - graphqlnet
 
     client:
-        build: ./node/server
+        build: ./node/client
         image: node-client:0.1
         restart: always
         command: npm run start
         volumes:
-            - ./node/client/server:/usr/src/app
+            - ./node/client:/usr/src/app
             - client_node_modules:/usr/src/app/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
         ports:
             - 3000:3000
-        depends_on:
-            - server
         networks:
             - graphqlnet
 

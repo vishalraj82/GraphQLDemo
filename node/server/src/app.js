@@ -1,9 +1,14 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const schema = require("./schema/schema");
 const app = express();
+
+
+// Allow cross-origin request since client is on different host / port / protocol
+app.use(cors());
 
 /**
  * From the docker logs, it can be clearly seen that the specified user in the file docker-compose.yml
@@ -17,9 +22,9 @@ mongoose.connection.once("open", () => {
 
 app.use("/graphql", graphqlHTTP({
     schema,
-    graphiql: true
+    graphiql: false
 }));
 
-app.listen(8080, (req, res) => {
-    console.log("Listening on port 8080...");
+app.listen(4000, (req, res) => {
+    console.log("Listening on port 4000...");
 });
