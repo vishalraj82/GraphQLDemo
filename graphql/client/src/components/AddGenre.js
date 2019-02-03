@@ -38,7 +38,7 @@ class AddGenreComponent extends Component {
                 <form id="add-genre" onSubmit={this.onSubmitForm}>
                     <p>
                         <label>Name:</label>
-                        <input style={{ marginLeft: 10 }} type="text" name="name" onChange={this.onChangeGenreName}/>
+                        <input style={{ marginLeft: 10 }} type="text" onChange={this.onChangeGenreName}/>
                     </p>
                     <p>
                         <input type="submit" value="Add Genre" />

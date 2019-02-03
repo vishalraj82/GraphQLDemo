@@ -60,6 +60,9 @@ class AddBookComponent extends Component {
     }
 
     render() {
+        const authors = this.props.getAuthorsQuery.authors || [];
+        const genres = this.props.getGenresQuery.genres || [];
+
         return (
             <div>
                 <form id="add-book" onSubmit={this.onSubmitForm}>
@@ -70,21 +73,13 @@ class AddBookComponent extends Component {
                     <p>
                         <label>Genre: </label>
                         <select onChange={this.onChangeGenreId}>
-                            {
-                                this.props.getGenresQuery.genres && this.props.getGenresQuery.genres.map(
-                                    genre => (<li key={genre.id}>{genre.name}</li>)
-                                )
-                            }
+                            { genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) }
                         </select>
                     </p>
                     <p>
                         <label>Author: </label>
                         <select onChange={this.onChangeAuthorId}>
-                            {
-                                this.props.getAuthorsQuery.authors && this.props.getAuthorsQuery.authors.map(
-                                    author => (<li key={author.id}>{author.name}</li>)
-                                )
-                            }
+                            { authors.map(author => (<li key={author.id}>{author.name}</li>)) }
                         </select>
                     </p>
                     <p>
