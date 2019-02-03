@@ -9,7 +9,7 @@ const getAuthorsQuery = gql`
     }
 `;
 
-const addAuthorQuery = gql`
+const addAuthorMutation = gql`
     mutation ($name: String!) {
         addAuthor(name: $name) {
             id
@@ -20,5 +20,5 @@ const addAuthorQuery = gql`
 
 export {
     getAuthorsQuery,
-    addAuthorQuery
+    addAuthorMutation
 }

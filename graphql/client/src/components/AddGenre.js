@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
 
-import { addGenreMutation } from "../queries/genre.js";
+import { addGenreMutation, getGenresQuery } from "../queries/genre.js";
 
 class AddGenreComponent extends Component {
     constructor(props) {
@@ -28,7 +28,10 @@ class AddGenreComponent extends Component {
         this.props.addGenreMutation({
             variables: {
                 name: this.state.genre.name
-            }
+            },
+            refetchQueries: [
+                { query: getGenresQuery }
+            ]
         })
     }
 
@@ -36,6 +39,7 @@ class AddGenreComponent extends Component {
         return (
             <div>
                 <form id="add-genre" onSubmit={this.onSubmitForm}>
+                    <h4>Add new Genre</h4>
                     <p>
                         <label>Name:</label>
                         <input style={{ marginLeft: 10 }} type="text" onChange={this.onChangeGenreName}/>

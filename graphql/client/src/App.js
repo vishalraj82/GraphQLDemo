@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import Route from "react-router-dom/Route";
 
 import { BookList } from "./components/BookList.js";
 import { AuthorList } from "./components/AuthorList.js";
 import { GenreList } from "./components/GenreList.js";
 
-const client = new ApolloClient({ url: "http://localhost:4000/graphql" });
+const client = new ApolloClient({ uri: "http://localhost:4000/graphql" });
 
 class App extends Component {
     render() {
@@ -19,9 +19,9 @@ class App extends Component {
                     <Route path="/" exact string render={
                         () => (
                             <div className="center">
-                                <p><a href="/books">Books</a></p>
-                                <p><a href="/authors">Authors</a></p>
-                                <p><a href="/genres">Genres</a></p>
+                                <p><Link to="/books">Books</Link></p>
+                                <p><Link to="/authors">Authors</Link></p>
+                                <p><Link to="/genres">Genres</Link></p>
                             </div>
                         )
                     } />

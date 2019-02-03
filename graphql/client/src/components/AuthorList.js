@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
+
+import { AddAuthor } from "./AddAuthor";
 import { getAuthorsQuery } from "../queries/author.js";
 
 class AuthorListComponent extends Component {
@@ -13,7 +15,11 @@ class AuthorListComponent extends Component {
         } else if (Array.isArray(data.authors) && data.authors.length) {
             return (
                 <ul>
-                    {data.authors.map(author => (<li key={author.id}>{author.name}</li>))}
+                    {
+                        data.authors.map(
+                            author => (<li key={author.id}>{author.name}</li>)
+                        )
+                    }
                 </ul>
             );
         }
@@ -25,6 +31,7 @@ class AuthorListComponent extends Component {
         return (
             <div id="author-list">
                 {this.displayAuthorList()}
+                <AddAuthor />
             </div>
         );
     }

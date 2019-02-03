@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
-import { addAuthorMutation } from "../queries/genre.js";
+
+import { getAuthorsQuery, addAuthorMutation } from "../queries/author.js";
 
 class AddAuthorComponent extends Component {
     constructor(props) {
@@ -14,10 +15,10 @@ class AddAuthorComponent extends Component {
         this.onSubmitForm = this.onSubmitForm.bind(this);
     }
 
-    onChangeAuthorName(e) {
+    onChangeAuthorName(authorName) {
         this.setState({
-            genre: {
-                name: e.target.value
+            author: {
+                name: authorName
             }
         });
     }
@@ -25,15 +26,26 @@ class AddAuthorComponent extends Component {
     onSubmitForm(e) {
         e.preventDefault();
 
+        const { author } = this.state;
+
+        this.props.addAuthorMutation({
+            variables: {
+                name: author.name
+            },
+            refetchQueries: [
+                { query: getAuthorsQuery }
+            ]
+        });
     }
 
     render() {
         return (
             <div>
                 <form id="add-genre" onSubmit={this.onSubmitForm}>
+                    <h4>Add new Author</h4>
                     <p>
                         <label>Name:</label>
-                        <input style={{ marginLeft: 10 }} type="text" name="name" onChange={this.onChangeAuthorName}/>
+                        <input style={{ marginLeft: 10 }} type="text" name="name" onChange={(e) => this.onChangeAuthorName(e.target.value)}/>
                     </p>
                     <p>
                         <input type="submit" value="Add Author" />
@@ -45,7 +57,8 @@ class AddAuthorComponent extends Component {
 };
 
 const AddAuthor = compose(
-    graphql(addAuthorMutation, { name: "addAuthorMutation"} )
+    graphql(getAuthorsQuery, { name: "getAuthorsQuery"}),
+    graphql(addAuthorMutation, { name: "addAuthorMutation"})
 )(AddAuthorComponent);
 
 export { AddAuthor };

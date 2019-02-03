@@ -21,40 +21,44 @@ class AddBookComponent extends Component {
         this.onSubmitForm = this.onSubmitForm.bind(this);
     }
 
-    onChangeBookName(e) {
+    onChangeBookName(bookName) {
         this.setState({
             book: {
-                name: e.target.value
+                name: bookName
             }
         });
     }
 
-    onChangeGenreId (e) {
+    onChangeGenreId (genreId) {
         this.setState({
             genre: {
-                id: e.target.value
+                id: genreId
             }
         });
     }
 
-    onChangeAuthorId (e) {
+    onChangeAuthorId (authorId) {
         this.setState({
             author: {
-                id: e.target.value
+                id: authorId
             }
         });
     }
 
     onSubmitForm(e) {
         e.preventDefault();
+        const { book, genre, author } = this.state;
+
         this.props.addBookMutation({
             variables: {
-                name: this.state.book.name,
-                genreId: this.state.genre.id,
-                authorId: this.state.author.id
+                name: book.name,
+                genreId: genre.id,
+                authorId: author.id
             },
             refetchQueries: [
-                { query: getBooksQuery }
+                { query: getBooksQuery },
+                { query: getAuthorsQuery },
+                { query: getGenresQuery }
             ]
         });
     }
@@ -66,20 +70,21 @@ class AddBookComponent extends Component {
         return (
             <div>
                 <form id="add-book" onSubmit={this.onSubmitForm}>
+                    <h4>Add new Book</h4>
                     <p>
                         <label>Name: </label>
-                        <input type="text" onChange={this.onChangeBookName} />
+                        <input type="text" onChange={(e) => this.onChangeBookName(e.target.value) } />
                     </p>
                     <p>
                         <label>Genre: </label>
-                        <select onChange={this.onChangeGenreId}>
-                            { genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) }
+                        <select onChange={(e) => this.onChangeGenreId(e.target.value) }>
+                            { genres.map(genre => (<option key={genre.id} value={genre.id}>{genre.name}</option>)) }
                         </select>
                     </p>
                     <p>
                         <label>Author: </label>
-                        <select onChange={this.onChangeAuthorId}>
-                            { authors.map(author => (<li key={author.id}>{author.name}</li>)) }
+                        <select onChange={(e) => this.onChangeAuthorId(e.target.value) }>
+                            { authors.map(author => (<option key={author.id} value={author.id}>{author.name}</option>)) }
                         </select>
                     </p>
                     <p>
