@@ -6,8 +6,8 @@
     "license": "ISC",
     "private": true,
     "scripts": {
-        "dev": "nodemon src/app.js",
-        "debug": "nodemon src/app.js"
+        "dev": "nodemon src/App.js",
+        "debug": "nodemon src/App.js"
     },
     "dependencies": {
         "express": "^4.16.4",

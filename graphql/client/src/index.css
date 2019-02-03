@@ -1,0 +1,19 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+    font-family: Open Sans;
+    background-color: #EEE;
+    width: 800px;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-item: center;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    font-size: 18px;
+}

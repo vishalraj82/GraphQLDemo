@@ -30,14 +30,17 @@ services:
         networks:
             - graphqlnet
 
-    server:
-        build: ./node/server
-        image: node-server:0.1
+    graphql-server:
+        build:
+            context: ./graphql/server
+            args:
+                - 'INSTALL_DIR=$SERVER_INSTALL_DIR'
+        image: graphql-server:0.1
         restart: always
         command: npm run dev
         volumes:
-            - ./node/server:/usr/src/app
-            - server_node_modules:/usr/src/app/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
+            - ./graphql/server:${SERVER_INSTALL_DIR}
+            - server_node_modules:${SERVER_INSTALL_DIR}/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
         ports:
             - 4000:4000
         depends_on:
@@ -45,14 +48,17 @@ services:
         networks:
             - graphqlnet
 
-    client:
-        build: ./node/client
-        image: node-client:0.1
+    graphql-client:
+        build:
+            context: ./graphql/client
+            args:
+                - 'INSTALL_DIR=$CLIENT_INSTALL_DIR'
+        image: graphql-client:0.1
         restart: always
         command: npm run start
         volumes:
-            - ./node/client:/usr/src/app
-            - client_node_modules:/usr/src/app/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
+            - ./graphql/client:${CLIENT_INSTALL_DIR}
+            - client_node_modules:${CLIENT_INSTALL_DIR}/node_modules # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
         ports:
             - 3000:3000
         networks:

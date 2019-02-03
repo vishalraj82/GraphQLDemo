@@ -3,7 +3,7 @@ const graphqlHTTP = require("express-graphql");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const schema = require("./schema/schema");
+const schema = require("./schema/index.js");
 const app = express();
 
 
@@ -20,10 +20,7 @@ mongoose.connection.once("open", () => {
     console.log("Connected to Mongodb...");
 });
 
-app.use("/graphql", graphqlHTTP({
-    schema,
-    graphiql: false
-}));
+app.use("/graphql", (req, res) => graphqlHTTP({ schema, graphiql: Boolean(req.query.graphiql) })(req, res));
 
 app.listen(4000, (req, res) => {
     console.log("Listening on port 4000...");
