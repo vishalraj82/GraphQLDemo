@@ -36,3 +36,5 @@ Optionally you may also star the docker container to explore the mongodb
 > docker-compose up mongo-express
 
 Once all the docker container start without any error, visit http://localhost:3000/
+
+NOTE: The application is in basic state, without any check for non-existance of entity, duplicity or otherwise.
