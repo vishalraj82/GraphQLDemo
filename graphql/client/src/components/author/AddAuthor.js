@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
-
-import { getAuthorsQuery, addAuthorMutation } from "../queries/author.js";
+import { getAuthorsQuery, addAuthorMutation } from "../../queries/author.js";
 
 class AddAuthorComponent extends Component {
     constructor(props) {
@@ -40,18 +39,20 @@ class AddAuthorComponent extends Component {
 
     render() {
         return (
-            <div>
-                <form id="add-genre" onSubmit={this.onSubmitForm}>
-                    <h4>Add new Author</h4>
-                    <p>
-                        <label>Name:</label>
-                        <input style={{ marginLeft: 10 }} type="text" name="name" onChange={(e) => this.onChangeAuthorName(e.target.value)}/>
-                    </p>
-                    <p>
-                        <input type="submit" value="Add Author" />
-                    </p>
-                </form>
-            </div>
+            <form id="add-genre" onSubmit={this.onSubmitForm}>
+                <h4 className="text-center">Add new Book</h4>
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">Name: </label>
+                    <div className="col-sm-10">
+                        <input className="form-control" type="text" onChange={(e) => this.onChangeAuthorName(e.target.value) } />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <div className="col-sm-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-sm btn-primary">Add Author</button>
+                    </div>
+                </div>
+            </form>
         );
     }
 };

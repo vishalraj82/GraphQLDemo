@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
-
-import { getBooksQuery, addBookMutation } from "../queries/book.js";
-import { getAuthorsQuery } from "../queries/author.js";
-import { getGenresQuery } from "../queries/genre.js";
+import { getAuthorsQuery } from "../../queries/author.js";
+import { getBooksQuery, addBookMutation } from "../../queries/book.js";
+import { getGenresQuery } from "../../queries/genre.js";
 
 
 class AddBookComponent extends Component {
@@ -68,30 +67,37 @@ class AddBookComponent extends Component {
         const genres = this.props.getGenresQuery.genres || [];
 
         return (
-            <div>
-                <form id="add-book" onSubmit={this.onSubmitForm}>
-                    <h4>Add new Book</h4>
-                    <p>
-                        <label>Name: </label>
-                        <input type="text" onChange={(e) => this.onChangeBookName(e.target.value) } />
-                    </p>
-                    <p>
-                        <label>Genre: </label>
-                        <select onChange={(e) => this.onChangeGenreId(e.target.value) }>
+            <form id="add-book" onSubmit={this.onSubmitForm}>
+                <h4 className="text-center">Add new Book</h4>
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">Name: </label>
+                    <div className="col-sm-10">
+                        <input className="form-control" type="text" onChange={(e) => this.onChangeBookName(e.target.value) } />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">Genre: </label>
+                    <div className="col-sm-10">
+                        <select className="form-control" onChange={(e) => this.onChangeGenreId(e.target.value) }>
                             { genres.map(genre => (<option key={genre.id} value={genre.id}>{genre.name}</option>)) }
                         </select>
-                    </p>
-                    <p>
-                        <label>Author: </label>
-                        <select onChange={(e) => this.onChangeAuthorId(e.target.value) }>
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">Author: </label>
+                    <div className="col-sm-10">
+                        <select className="form-control" onChange={(e) => this.onChangeAuthorId(e.target.value) }>
                             { authors.map(author => (<option key={author.id} value={author.id}>{author.name}</option>)) }
                         </select>
-                    </p>
-                    <p>
-                        <input type="submit" value="Add Book" />
-                    </p>
-                </form>
-            </div>
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <div className="col-sm-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-sm btn-primary">Add book</button>
+                    </div>
+                </div>
+                
+            </form>
         )
     }
 }

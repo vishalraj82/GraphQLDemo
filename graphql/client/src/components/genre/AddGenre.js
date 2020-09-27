@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
-
-import { addGenreMutation, getGenresQuery } from "../queries/genre.js";
+import { addGenreMutation, getGenresQuery } from "../../queries/genre.js";
 
 class AddGenreComponent extends Component {
     constructor(props) {
@@ -37,18 +36,20 @@ class AddGenreComponent extends Component {
 
     render() {
         return (
-            <div>
-                <form id="add-genre" onSubmit={this.onSubmitForm}>
-                    <h4>Add new Genre</h4>
-                    <p>
-                        <label>Name:</label>
-                        <input style={{ marginLeft: 10 }} type="text" onChange={this.onChangeGenreName}/>
-                    </p>
-                    <p>
-                        <input type="submit" value="Add Genre" />
-                    </p>
-                </form>
-            </div>
+            <form id="add-genre" className="mt-2" onSubmit={this.onSubmitForm}>
+                <h4 className="text-center">Add new Genre</h4>
+                <div className="form-group row">
+                    <label for="genreName" className="col-sm-2 col-form-label">Name</label>
+                    <div className="col-sm-10">
+                        <input type="text" className="form-control" id="genreName" onChange={this.onChangeGenreName} />
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <div className="col-sm-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-sm btn-primary">Add Genre</button>
+                    </div>
+                </div>
+            </form>
         );
     }
 };
