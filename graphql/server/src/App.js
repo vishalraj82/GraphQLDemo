@@ -15,7 +15,7 @@ app.use(cors());
  * is created under database admin for authentication purpose. Hence, admin is given in connection url.
  */
 
-mongoose.connect("mongodb://mdbroot:mdbpass@mongo:27017/admin", { useNewUrlParser: true })
+mongoose.connect("mongodb://mdbroot:mdbpass@mongoDB:27017/admin", { useNewUrlParser: true })
 mongoose.connection.once("open", () => {
     console.log("Connected to Mongodb...");
 });

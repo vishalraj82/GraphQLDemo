@@ -26,9 +26,9 @@ Four docker services have been defined in docker-compose.yml
 To start using the application, you need to start three docker container
 
 <ul>
-    <li>docker-compose up mongo</li>
-    <li>docker-compose up --build graphql-server</li>
-    <li>docker-compose up --build graphql-client</li>
+    <li>docker-compose up mongoDB</li>
+    <li>docker-compose up --build graphqlServer</li>
+    <li>docker-compose up --build graphqlClient</li>
 </ul>
 
 Optionally you may also star the docker container to explore the mongodb

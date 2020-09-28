@@ -7,7 +7,7 @@ import { AuthorList } from "./components/author/AuthorList.js";
 import { BookList } from "./components/book/BookList.js";
 import { GenreList } from "./components/genre/GenreList.js";
 
-const client = new ApolloClient({ uri: "http://localhost:4000/graphql" });
+const client = new ApolloClient({ uri: "http://graphqlServer:4000/graphql" });
 
 class App extends Component {
     render() {
